@@ -45,7 +45,7 @@ function createUI() {
     controls.innerHTML += `
         <hr>
 
-        <h2>Rotation (radians)</h2>
+        <h2>Rotasi</h2>
         <label>X</label>
         <input id="rotX" type="range" min="-3.14" max="3.14" step="0.01" value="0">
 
@@ -55,24 +55,24 @@ function createUI() {
         <label>Z</label>
         <input id="rotZ" type="range" min="-3.14" max="3.14" step="0.01" value="0">
 
-        <h2>Scale</h2>
+        <h2>Skala</h2>
         <input id="scale" type="range" min="0.2" max="2" step="0.01" value="1">
 
-        <h2>Position X</h2>
+        <h2>Posisi X</h2>
         <input id="posX" type="range" min="-5" max="5" step="0.1" value="0">
 
-        <h2>Position Y</h2>
+        <h2>Posisi Y</h2>
         <input id="posY" type="range" min="-5" max="5" step="0.1" value="0">
 
-        <h2>Position Z</h2>
+        <h2>Posisi Z</h2>
         <input id="posZ" type="range" min="-5" max="5" step="0.1" value="0">
 
         <hr>
 
         <div id="info">
-            <p><b>Position:</b> <span id="posText"></span></p>
-            <p><b>Rotation:</b> <span id="rotText"></span></p>
-            <p><b>Scale:</b> <span id="scaleText"></span></p>
+            <p><b>Posisi:</b> <span id="posText"></span></p>
+            <p><b>Rotasi:</b> <span id="rotText"></span></p>
+            <p><b>Skala:</b> <span id="scaleText"></span></p>
         </div>
     `;
 
@@ -99,6 +99,7 @@ function createUI() {
         cube.position.y = parseFloat(posY.value);
         cube.position.z = parseFloat(posZ.value);
         updateInfo();
+        updateMathPanel();
     }
 
     [rotX, rotY, rotZ, scale, posX, posY, posZ].forEach(el => {
@@ -117,6 +118,50 @@ function updateInfo() {
 
     document.getElementById("scaleText").innerText =
         `(${cube.scale.x.toFixed(2)}, ${cube.scale.y.toFixed(2)}, ${cube.scale.z.toFixed(2)})`;
+}
+
+function updateMathPanel() {
+
+     const x = cube.rotation.x;
+    const y = cube.rotation.y;
+    const z = cube.rotation.z;
+
+    const cx = Math.cos(x).toFixed(2);
+    const sx = Math.sin(x).toFixed(2);
+
+    const cy = Math.cos(y).toFixed(2);
+    const sy = Math.sin(y).toFixed(2);
+
+    const cz = Math.cos(z).toFixed(2);
+    const sz = Math.sin(z).toFixed(2);
+
+    document.getElementById("rotMatriks").innerText = `
+Rotasi X:
+[1  0   0]
+[0 ${cx} ${-sx}]
+[0 ${sx} ${cx}]
+
+Rotasi Y:
+[${cy} 0 ${sy}]
+[0   1  0]
+[-${sy} 0 ${cy}]
+
+Rotasi Z:
+[${cz} ${-sz} 0]
+[${sz} ${cz}  0]
+[0   0   1]
+`;
+
+    const s = cube.scale.x.toFixed(2);
+
+    document.getElementById("scaleMatriks").innerText = `
+[ ${s}  0   0 ]
+[ 0   ${s}  0 ]
+[ 0   0   ${s} ]
+`;
+
+    document.getElementById("vectorText").innerText =
+        `v = (${cube.position.x.toFixed(2)}, ${cube.position.y.toFixed(2)}, ${cube.position.z.toFixed(2)})`;
 }
 
 function onWindowResize() {
