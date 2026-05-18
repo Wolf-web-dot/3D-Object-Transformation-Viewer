@@ -64,6 +64,9 @@ function createUI() {
         <h2>Position Y</h2>
         <input id="posY" type="range" min="-5" max="5" step="0.1" value="0">
 
+        <h2>Position Z</h2>
+        <input id="posZ" type="range" min="-5" max="5" step="0.1" value="0">
+
         <hr>
 
         <div id="info">
@@ -81,6 +84,8 @@ function createUI() {
 
     const posX = document.getElementById("posX");
     const posY = document.getElementById("posY");
+    const posZ = document.getElementById("posZ");
+
 
     function update() {
         cube.rotation.x = parseFloat(rotX.value);
@@ -92,11 +97,11 @@ function createUI() {
 
         cube.position.x = parseFloat(posX.value);
         cube.position.y = parseFloat(posY.value);
-
+        cube.position.z = parseFloat(posZ.value);
         updateInfo();
     }
 
-    [rotX, rotY, rotZ, scale, posX, posY].forEach(el => {
+    [rotX, rotY, rotZ, scale, posX, posY, posZ].forEach(el => {
         el.addEventListener("input", update);
     });
 
