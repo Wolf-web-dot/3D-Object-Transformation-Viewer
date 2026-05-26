@@ -8,13 +8,14 @@
     <link rel="stylesheet" href="style.css">
 
     <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/mathjs@12.4.2/lib/browser/math.js"></script>
 </head>
 <body>
 
     <div class="container">
 
         <div id="mathPanel">
-            <h2>Transformation Info</h2>
+            <h2 id="objLabel">Cube</h2>
 
             <div>
                 <b>Rotasi Matriks</b>
@@ -33,9 +34,7 @@
         </div>
 
         <div class="controls">
-
-            <h1>3D Object Transformation Viewer</h1>
-
+            <h1>3D Transformation Viewer</h1>
         </div>
 
         <div id="canvas-container"></div>
