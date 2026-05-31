@@ -7,6 +7,7 @@ const objects = [
     { label: "Torus",      geo: () => new THREE.TorusGeometry(0.6, 0.25, 16, 100), color: 0xa29bfe },
     { label: "Cylinder",   geo: () => new THREE.CylinderGeometry(0.5, 0.5, 1.5, 32), color: 0x55efc4 },
     { label: "Octahedron", geo: () => new THREE.OctahedronGeometry(0.8),      color: 0xfd79a8 },
+    { label: "Pyramid",    geo: () => new THREE.ConeGeometry(0.8, 1.2, 4),     color: 0xffd166 },
 ];
 
 init();
