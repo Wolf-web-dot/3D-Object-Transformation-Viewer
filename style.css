@@ -95,21 +95,6 @@ hr {
     background: #2c2c2c;
 }
 
-#matriksPanel {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #1a1a1a;
-    border-radius: 8px;
-}
-
-#matriksText {
-    margin-top: 10px;
-    color: #00ffcc;
-    font-size: 13px;
-    line-height: 1.6;
-    white-space: pre-wrap;
-}
-
 #mathPanel {
     position: absolute;
     top: 20px;
@@ -121,6 +106,8 @@ hr {
     color: #00ffcc;
     font-size: 12px;
     z-index: 10;
+    backdrop-filter: blur(6px);
+    border: 1px solid #444;
 }
 
 #mathPanel h2 {
@@ -133,4 +120,31 @@ hr {
     margin-bottom: 10px;
     white-space: pre-wrap;
     color: #ffffff;
+}
+
+.input-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.input-row input[type="number"] {
+    width: 70px;
+    padding: 5px;
+    background-color: #1e1e1e;
+    border: 1px solid #555;
+    color: white;
+    border-radius: 5px;
+}
+
+.obj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.obj-btn.active {
+    background-color: #00bfff;
+    color: black;
+    font-weight: bold;
 }
