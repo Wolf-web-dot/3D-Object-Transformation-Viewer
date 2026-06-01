@@ -1,4 +1,4 @@
-let scene, camera, renderer, object3D;
+let scene, camera, renderer, object3D, controls;
 
 const objects = [
     { label: "Kubus",      geo: () => new THREE.BoxGeometry(), color: 0x00bfff },
@@ -38,6 +38,14 @@ function init() {
         window.innerHeight
     );
 
+    controls = new THREE.OrbitControls(
+        camera,
+        renderer.domElement
+    );
+
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+
     document
         .getElementById("canvas-container")
         .appendChild(renderer.domElement);
@@ -52,6 +60,10 @@ function init() {
 
     scene.add(new THREE.GridHelper(10, 10));
     scene.add(new THREE.AxesHelper(5));
+
+    createAxisLabel("X", 5.5, 0, 0, "red");
+    createAxisLabel("Y", 0, 5.5, 0, "green");
+    createAxisLabel("Z", 0, 0, 5.5, "blue");
 
     object3D = new THREE.Mesh(
         objects[0].geo(),
@@ -362,5 +374,35 @@ function animate() {
 
     requestAnimationFrame(animate);
 
+    controls.update();
+
     renderer.render(scene, camera);
+}
+
+function createAxisLabel(text, x, y, z, color) {
+
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+
+    canvas.width = 128;
+    canvas.height = 128;
+
+    context.fillStyle = color;
+    context.font = "80px Arial";
+    context.textAlign = "center";
+    context.fillText(text, 64, 90);
+
+    const texture = new THREE.CanvasTexture(canvas);
+
+    const material = new THREE.SpriteMaterial({
+        map: texture
+    });
+
+    const sprite = new THREE.Sprite(material);
+
+    sprite.position.set(x, y, z);
+
+    sprite.scale.set(0.7, 0.7, 0.7);
+
+    scene.add(sprite);
 }
